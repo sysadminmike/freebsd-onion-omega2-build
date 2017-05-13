@@ -45,7 +45,7 @@ You should now have a kernel in ../tfpboot
 
 Covert to binary:
 
-    objcopy -O binary kernel.MT7628_FDT kernel.kernel.MT7628_FDT.kbin
+    objcopy -O binary kernel.MT7628_FDT kernel.MT7628_FDT.kbin
 
 Compress:
 
@@ -54,6 +54,10 @@ Compress:
 Make a u-boot image:
 
     mkimage -A mips -O linux -T kernel -C lzma -a 0x80001100 -e 0x80001100 -n "FreeBSD" -d kernel.MT7628_FDT.kbin.lzma kernel.MT7628_FDT.lzma.uImage
+
+Note: If this does not boot check the address of the kernel entry point with 
+
+    readelf -h tftpboot/kernel.MT7628_FDT 
 
 Copy to a usb fat formatted usb key:
 
